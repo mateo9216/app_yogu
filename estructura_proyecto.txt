@@ -1,0 +1,39 @@
+.
+├── Dockerfile
+├── docker-compose.yaml
+├── estructura_proyecto.txt
+├── package-lock.json
+├── package.json
+└── src
+    ├── app.js
+    ├── autenticacion
+    │   └── index.js
+    ├── config.js
+    ├── db
+    │   └── mysql.js
+    ├── index.js
+    ├── middleware
+    │   └── error.js
+    ├── modules
+    │   ├── auth
+    │   │   ├── controlador.js
+    │   │   ├── index.js
+    │   │   └── rutas.js
+    │   ├── clientes
+    │   │   ├── controlador.js
+    │   │   ├── index.js
+    │   │   └── rutas.js
+    │   ├── milk
+    │   │   ├── controlador.js
+    │   │   ├── index.js
+    │   │   └── rutas.js
+    │   └── usuarios
+    │       ├── controlador.js
+    │       ├── index.js
+    │       ├── rutas.js
+    │       └── seguridad.js
+    └── red
+        ├── errors.js
+        └── respuestas.js
+
+11 directories, 26 files

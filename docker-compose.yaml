@@ -1,26 +1,26 @@
-version: '3.8'
+version: '3.8'  # Especifica la versión de Docker Compose que se está utilizando.
 
-services:
-  app:
-    build: .
-    depends_on:
+services:  # Define los servicios que forman parte de la aplicación.
+
+  app:  # Servicio para la aplicación Node.js.
+    build: .  # Construye la imagen a partir del Dockerfile ubicado en el directorio actual.
+    depends_on:  # Asegura que el servicio 'mysql_db' se inicie antes que 'app'.
       - mysql_db
-    links: 
+    links:  # Establece un enlace de red entre 'app' y 'mysql_db', permitiendo que 'app' acceda a 'mysql_db' utilizando su nombre como hostname.
       - mysql_db
-    ports:
+    ports:  # Mapea el puerto 3000 del contenedor al puerto 3000 de la máquina host, permitiendo el acceso a la aplicación desde fuera del contenedor.
       - "3000:3000"
 
-  mysql_db:
-    image: mysql
-    restart: always
-    env_file: ./.env
-    environment:
-      - MYSQL_ROOT_PASSWORD:$MYSQLDB_PASSWORD
-      - MYSQL_DATABASE:$MYSQLDB_DATA_DB
-    ports:
+  mysql_db:  # Servicio para la base de datos MySQL.
+    image: mysql  # Utiliza la imagen oficial de MySQL.
+    restart: always  # Configura el contenedor para que siempre se reinicie si se detiene, ya sea por error o actualización.
+    environment:  # Define variables de entorno para configurar MySQL.
+      MYSQL_ROOT_PASSWORD: yogu  # Establece la contraseña para el usuario root de MySQL.
+      MYSQL_DATABASE: yogu_datadb  # Crea una base de datos llamada 'yogu_datadb'.
+    ports:  # Mapea el puerto 3306 del contenedor al puerto 3306 de la máquina host, permitiendo el acceso a MySQL desde fuera del contenedor.
       - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+    volumes:  # Monta un volumen persistente para almacenar los datos de la base de datos.
+      - db_data:/var/lib/mysql  # 'db_data' es el nombre del volumen, y '/var/lib/mysql' es la ubicación dentro del contenedor donde se almacenan los datos.
 
-volumes:
-  db_data:
+volumes:  # Define los volúmenes utilizados por los servicios.
+  db_data:  # Crea un volumen llamado 'db_data' para persistir los datos de MySQL, evitando que se pierdan cuando el contenedor se reinicie o elimine.
