@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const config = require('./config');
 const error = require('./red/errors');
@@ -26,6 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configuración
 app.set('port', config.app.port);
+
+app.use(cors({
+    origin: 'http://localhost:4200'
+  }));
 
 // Rutas
 app.use('/api/auth', auth);
